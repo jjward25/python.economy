@@ -41,8 +41,6 @@ indexes_final = pd.merge(indexes_final,indexes_previous, on='Symbol',how='left')
 ##! Create Calculated Fields
 indexes_final['Daily Change $'] = indexes_final['Last Close $'] - indexes_final['Previous Close $']
 indexes_final['Daily Change %'] = (indexes_final['Daily Change $']/indexes_final['Previous Close $'])*100 
-indexes_final.loc[indexes_final['Daily Change $'] < 0, 'Health Score'] = -.5
-indexes_final.loc[indexes_final['Daily Change $'] > 0, 'Health Score'] = .5
 # print(indexes_final)
 
 # Health Score Variables
@@ -165,7 +163,7 @@ competition_health_df = daily_health_df.loc[np.isin(daily_health_df,['Small Cap 
 
 ##! Sidebar: Health Score and  Date input form (for trend charts)
 with st.sidebar:
-    st.write(f'### Daily Health Score: {daily_health_score}')
+    st.write(f'# Daily Health Score: {daily_health_score}')
     daily_health_df
     st.write('### Trend Chart Date Range')
     st.write('Please enter dates in the format shown.')
