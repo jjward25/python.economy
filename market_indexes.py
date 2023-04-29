@@ -4,8 +4,6 @@ import streamlit as st
 from datetime import date, timedelta
 import pandas as pd
 import numpy as np
-import seaborn as sns
-import matplotlib.pyplot as plt
 # Date Variables
 today = date.today()
 start_date = today - timedelta(days=365)
