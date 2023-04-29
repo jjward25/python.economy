@@ -1,1 +1,0 @@
-streamlit run c:\Users\Joe\OneDrive\Desktop\Coding\python.economy\stocks.py

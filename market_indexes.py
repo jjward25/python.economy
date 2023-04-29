@@ -4,6 +4,8 @@ import streamlit as st
 from datetime import date, timedelta
 import pandas as pd
 import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
 # Date Variables
 today = date.today()
 start_date = today - timedelta(days=365)
@@ -164,7 +166,6 @@ competition_health_df = daily_health_df.loc[np.isin(daily_health_df,['Small Cap 
 ##! Sidebar: Health Score and  Date input form (for trend charts)
 with st.sidebar:
     st.write(f'# Daily Health Score: {daily_health_score}')
-    daily_health_df
     st.write('### Trend Chart Date Range')
     st.write('Please enter dates in the format shown.')
     _input = st.text_input("Start Date: YYYY-MM-DD")
@@ -175,12 +176,17 @@ with st.sidebar:
         end_date = _input2        
 
 ##! Header
-st.write("""
-# JWEI: Joe Ward Economic Index
-""")
-
+st.write(f'# Daily Health Score: {daily_health_score}')
+st.divider()
+col1, col2 = st.columns([1,1.3])
+with col1:
+    #st.area_chart(data=None, *, x=None, y=None, width=0, height=0, use_container_width=True)
+    st.bar_chart(daily_health_df[['Score','Metric']], y='Score',x='Metric', height=250,width=500, use_container_width=False)
+with col2:
+    daily_health_df
+st.divider()
 ##! Section Header
-my_expander = st.expander(f"## Market Health: {sum(market_health_df['Score'])}", expanded=False)
+my_expander = st.expander(f"## Market Health: {sum(market_health_df['Score'])}", expanded=True)
 with my_expander:
     ####################################
     ##! Major Markets Output:  
